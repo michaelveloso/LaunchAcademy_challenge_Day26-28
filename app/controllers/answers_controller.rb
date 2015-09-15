@@ -15,6 +15,13 @@ class AnswersController < ApplicationController
       flash[:notice] = "Answer submitted!"
       redirect_to question_path(question)
     else
+      @answer.errors.full_messages.each do |error|
+        if flash[:notice]
+          flash[:notice] << "<br>#{error}"
+        else
+          flash[:notice] = error
+        end
+      end
       redirect_to question_path(question)
     end
   end

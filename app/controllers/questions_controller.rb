@@ -24,13 +24,17 @@ class QuestionsController < ApplicationController
     @question.user = User.first
 
     if @question.save
-      flash[:notice] = 'question added'
+      flash[:notice] = 'Question added'
       redirect_to @question
     else
       @question.errors.full_messages.each do |error|
-        flash[:notice] = error
+        if flash[:notice]
+          flash[:notice] << "<br>#{error}"
+        else
+          flash[:notice] = error
+        end
       end
-      redirect_to @question
+      render :new
     end
   end
 
@@ -45,6 +49,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     question.destroy
+    flash[:notice] = 'question deleted'
     redirect_to questions_path
   end
 
