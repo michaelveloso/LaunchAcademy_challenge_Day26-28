@@ -6,7 +6,7 @@ RSpec.describe Question, type: :model do
   it { should have_valid(:title).when('Name', 'Name 2') }
   it { should_not have_valid(:title).when(nil, '') }
 
-  it { should_not have_valid(:user).when(nil)}
+  it { should_not have_valid(:user_id).when(nil)}
   context 'uniqueness' do
     it 'requires a unique name' do
       question = FactoryGirl.create(:question)

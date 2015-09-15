@@ -9,12 +9,14 @@ FactoryGirl.define do
   factory :question do
     sequence(:title) {|n| "Question #{n}"}
     sequence(:description) {|n| "Description #{n}"}
-    user User.new(username: "name", password: "password")
+    User.create(username: "username", password: "password")
+    user_id User.first.id
   end
 
   factory :answer do
     sequence(:body) {|n| "Answer #{n}"}
     question Question.new(title: "Question", description: "Description")
-    user User.new(username: "name", password: "password")
+    User.create(username: "username", password: "password")
+    user_id User.first.id
   end
 end

@@ -4,5 +4,5 @@ class Question < ActiveRecord::Base
 
   validates :title, presence: true, uniqueness: true#, length: {minimum: 40}
   validates :description, presence: true#, length: {minimum: 150}
-  validates :user, presence: true
+  validates :user_id, presence: true
 end
