@@ -17,7 +17,7 @@ class AnswersController < ApplicationController
     else
       @answer.errors.full_messages.each do |error|
         if flash[:notice]
-          flash[:notice] << "<br>#{error}"
+          flash[:notice] << ", #{error}"
         else
           flash[:notice] = error
         end

@@ -29,7 +29,7 @@ class QuestionsController < ApplicationController
     else
       @question.errors.full_messages.each do |error|
         if flash[:notice]
-          flash[:notice] << "<br>#{error}"
+          flash[:notice] << ", #{error}"
         else
           flash[:notice] = error
         end
@@ -39,10 +39,18 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if question.update(question_params)
+    @question = question
+    if @question.update(question_params)
       flash[:notice] = 'question edited'
-      redirect_to questions_path
+      redirect_to @question
     else
+      @question.errors.full_messages.each do |error|
+        if flash[:notice]
+          flash[:notice] << ", #{error}"
+        else
+          flash[:notice] = error
+        end
+      end
       render :edit
     end
   end
