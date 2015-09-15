@@ -1,0 +1,24 @@
+<h3><%= @question.title %></h3>
+<%= button_to 'Delete', @question, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= button_to 'Edit', edit_question_path(@question), method: :get %>
+<div class="question">
+  <div class="question_author">Asked by <%= @question.user.username %> at <%= @question.created_at %></div>
+  <br>
+  <div class="question_description"><%= @question.description %></div>
+</div>
+
+
+
+<%= render 'form_answer' %>
+
+<div class="answers">
+  <% @answers.each do |answer| %>
+    <div class="answer">
+      <div class="answer_user">At <%= answer.created_at %>, <%= answer.user.username %> said:</div>
+      <div class="answer_body"><%= answer.body %></div>
+    </div>
+    <br>
+  <% end %>
+</div>
+
+<%= link_to 'Back to questions', questions_path %>
